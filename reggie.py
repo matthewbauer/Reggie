@@ -8370,12 +8370,18 @@ def main():
             else:
                 settings.setValue('AutoSaveFilePath', 'none')
                 settings.setValue('AutoSaveFileData', 'x')
-    
-    # create and show the main window
-    mainWindow = ReggieWindow()
-    mainWindow.show()
-    sys.exit(app.exec_())
 
+    if sys.argv[1:]:
+        for argfile in sys.argv[1:]:
+            if os.path.exists(argfile):
+                mainWindow = ReggieWindow()
+                mainWindow.LoadLevel(argfile, True, 1)
+                mainWindow.show()
+    else:
+        # create and show the main window
+        mainWindow = ReggieWindow()
+        mainWindow.show()
+    sys.exit(app.exec_())
 
 EnableAlpha = True
 if '-alpha' in sys.argv:
